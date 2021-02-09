@@ -38,23 +38,24 @@ def divide_chunks(l, n):
 # cv2.resize(cv2.imread(file), (1920, 1080))
 
 def main():
-	directory = params.get('dir')
+	# directory = params.get('dir')
 
 	# num refers to lecture number
-	def writeimages(num,x_offset,y_offset,paper):
-		images = [cv2.resize(cv2.imread(file), (1920, 1080)) for file in natsorted(glob.glob("lectures/{}/*.jpeg".format(num)))]
+	def writeimages(folder, x_offset, y_offset, paper):
+		images = [cv2.resize(cv2.imread(file), (1920, 1080)) for file in natsorted(glob.glob("lectures/{}/*.jpg".format(folder)))]
 		subList = list(divide_chunks(images, 5))
+		print('here')
 		for i in range(len(subList)):
 			im_v = cv2.vconcat(subList[i])
 			overlayed = paper
 			overlayed[y_offset:y_offset+im_v.shape[0], x_offset:x_offset+im_v.shape[1]] = im_v
-			if not cv2.imwrite("concatenated_lectures/lec_{}_pt_{}.jpeg".format(num, i), overlayed):
+			if not cv2.imwrite("concatenated_lectures/lec_{}_pt_{}.jpeg".format(folder, i), overlayed):
 				raise Exception("Could not write image")
 
 	def writepdf():
 			# convert all files ending in .jpg inside a directory
 		dirname = "concatenated_lectures/"
-		with open("18.pdf","wb") as f:
+		with open("2.pdf", "wb") as f:
 			imgs = []
 			for fname in os.listdir(dirname):
 				if not fname.endswith(".jpeg"):
@@ -75,14 +76,14 @@ def main():
 	x_offset=0
 	y_offset=0
 
-	writeimages(18, x_offset, y_offset, graph_hor)
+	writeimages("2_truth_ethics", x_offset, y_offset, graph_hor)
 
-if __name__ == "__main__":
-	parser =  argparse.ArgumentParser(description = "tool name")
-	parser.add_argument('-dir', metavar = '-dir', type=str, help='')
-	params = vars(parser.parse_args())
-	print(params)
-	main()
+# if __name__ == "__main__":
+# 	parser =  argparse.ArgumentParser(description = "tool name")
+# 	# parser.add_argument('-dir', metavar = '-dir', type=str, help='')
+# 	# params = vars(parser.parse_args())
+# 	# print(params)
+main()
 
 
 
