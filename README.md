@@ -2,11 +2,11 @@
 Script to overlay pdfs and powerpoints of lecture slides into a concatenated strip on top of notebook paper for notes on iPad
 
 Will need to install:
-poppler: brew install poppler
-pdf2image: pip install pdf2image
-img2pdf: pip install img2pdf
-cv2: pip install opencv
-natsort: pip install natsort
+1. poppler: brew install poppler
+2. pdf2image: pip install pdf2image
+3. img2pdf: pip install img2pdf
+4. cv2: pip install opencv
+5. natsort: pip install natsort
 
 How to run this:
 python main.py -f <path_to_lecture_pdf_file>
