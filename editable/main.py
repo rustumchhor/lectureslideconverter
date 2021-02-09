@@ -20,6 +20,12 @@ class input_file:
 		# input_file._inputRegistry.append(self)
 
 
+def clear_directory(mydir, ext):
+	filelist = glob.glob(os.path.join(mydir, "*.{}".format(ext)))
+	for f in filelist:
+		os.remove(f)
+
+
 def main():
 	new_input = input_file(params.get('f'))
 
@@ -40,6 +46,11 @@ def main():
 	single_jpeg_to_5_graph_overlayed(input_directory=new_input.si_dirPath, lecture_name=new_input.lectureName, output_directory=new_input.con_dirPath, x_offset=0, y_offset=0, paper=graph_hor)
 
 	write_pdf(input_directory=new_input.con_dirPath, lecture_name=new_input.lectureName)
+
+	clear_directory(new_input.si_dirPath, 'jpg')
+	clear_directory(new_input.con_dirPath, 'jpg')
+
+
 
 
 if __name__ == "__main__":
