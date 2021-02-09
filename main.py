@@ -1,12 +1,8 @@
 import os
-import img2pdf
-import argparse
 import pathlib
 import glob
-
-from natsort import natsorted, ns
+import argparse
 import cv2
-import datetime
 from utils import *
 
 class input_file:
@@ -25,12 +21,8 @@ def clear_directory(mydir, ext):
 	for f in filelist:
 		os.remove(f)
 
-
 def main():
 	new_input = input_file(params.get('f'))
-
-	# now = datetime.datetime.now()
-	# datetime.datetime.strftime(now, '%m/%d/%Y')
 
 	new_input.si_dirPath = 'temp/single_images'
 	pathlib.Path(new_input.si_dirPath).mkdir(parents=True, exist_ok=True)
@@ -49,9 +41,6 @@ def main():
 
 	clear_directory(new_input.si_dirPath, 'jpg')
 	clear_directory(new_input.con_dirPath, 'jpg')
-
-
-
 
 if __name__ == "__main__":
 	parser =  argparse.ArgumentParser(description = "tool name")

@@ -1,15 +1,11 @@
 import os
-import img2pdf
-import pdf2image
-import tempfile
-import datetime
 import pathlib
 import glob
-
 from natsort import natsorted, ns
+import img2pdf
+import pdf2image
 import cv2
-import datetime
-from utils import *
+# import tempfile
 
 def divide_list(lst, n_way): 
     # looping till length list
@@ -17,20 +13,15 @@ def divide_list(lst, n_way):
         yield lst[i:i + n_way]
 
 
-# print single images, return output directory
+# print single images, jpeg defaults to jpg
 def pdf_to_images(file_path, output_directory, lecture_name):
 	images_from_path = pdf2image.convert_from_path(file_path, output_folder=output_directory, fmt='jpeg', output_file=lecture_name)
-	# for i, image in enumerate(images_from_path):
-	#     fname = lecture_name+str(i)+'.jpg'
-	#     image.save(fname)
 
 
 # input: directory of single images
-# loop through single images, print concat images
-# return output dir
+# loop through list of single images, split them into groups of 5, concatenate the groups vertically, save them ontop of graph paper image
 def single_jpeg_to_5_graph_overlayed(input_directory, lecture_name, output_directory, paper, x_offset=0, y_offset=0):
 	images = [cv2.resize(cv2.imread(file), (1920, 1080)) for file in natsorted(glob.glob("{}/*.jpg".format(input_directory)))]
-	print(input_directory,len(images))
 	subList = list(divide_list(images, 5))
 	for i, image in enumerate(subList):
 		im_v = cv2.vconcat(subList[i])
@@ -42,15 +33,15 @@ def single_jpeg_to_5_graph_overlayed(input_directory, lecture_name, output_direc
 
 
 # input: directory of concated images
-# loop through concat images
+# list all images in concatenated image directory
+# sort them using natural sort
+# loop through concated images
 # print concatenated in single pdf output
-## not needed return: output file_path?
 def write_pdf(input_directory, lecture_name):
 	fname = lecture_name+'_'+'output'+'.pdf'
 	with open(fname, "wb") as f:
 		imgs = []
 		for fname in os.listdir(input_directory):
-			print(fname)
 			if not fname.endswith(".jpg"):
 				continue
 			path = os.path.join(input_directory, fname)
