@@ -9,10 +9,15 @@ Will need to install:
 5. natsort: pip install natsort
 
 How to run this:
-python main.py -f <path_to_lecture_pdf_file>
+python main.py -f <path_to_lecture_pdf_file> -o <path_to_output_directory>
+The -o flag is optional, if the -o flag is not used, the default output directory is where the main.py file is located
 
 Example:
 python main.py -f /Users/rustum/Desktop/6_LM_1.pdf
+This will output the pdf to the directory where the python file is located
+
+python3 main.py -f /Users/rustum/Downloads/10_pos.pdf -o /Users/rustum/Desktop/INFO\ 159
+This will output the pdf under the directory I specified (/Users/rustum/Desktop/INFO\ 159)
 
 Output:
 6_LM_1_output.pdf
