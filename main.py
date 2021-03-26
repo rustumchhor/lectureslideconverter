@@ -23,6 +23,7 @@ def clear_directory(mydir, ext):
 
 def main():
 	new_input = input_file(params.get('f'))
+	output_directory=params.get('o')
 
 	new_input.si_dirPath = 'temp/single_images'
 	pathlib.Path(new_input.si_dirPath).mkdir(parents=True, exist_ok=True)
@@ -37,14 +38,15 @@ def main():
 	pathlib.Path(new_input.con_dirPath).mkdir(parents=True, exist_ok=True)
 	single_jpeg_to_5_graph_overlayed(input_directory=new_input.si_dirPath, lecture_name=new_input.lectureName, output_directory=new_input.con_dirPath, x_offset=0, y_offset=0, paper=graph_hor)
 
-	write_pdf(input_directory=new_input.con_dirPath, lecture_name=new_input.lectureName)
+	write_pdf(input_directory=new_input.con_dirPath, lecture_name=new_input.lectureName, output_directory=output_directory)
 
 	clear_directory(new_input.si_dirPath, 'jpg')
 	clear_directory(new_input.con_dirPath, 'jpg')
 
 if __name__ == "__main__":
 	parser =  argparse.ArgumentParser(description = "tool name")
-	parser.add_argument('-f', metavar = '-file', type=str, help='')
+	parser.add_argument('-f', metavar = '-file', type=str, help='path of input lecture pdf file')
+	parser.add_argument('-o', metavar = '-output_directory', type=str, help='output directory', default=os.path.dirname(os.path.realpath(__file__)))
 	params = vars(parser.parse_args())
 	print(params)
 	main()

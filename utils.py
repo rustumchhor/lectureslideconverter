@@ -37,9 +37,9 @@ def single_jpeg_to_5_graph_overlayed(input_directory, lecture_name, output_direc
 # sort them using natural sort
 # loop through concated images
 # print concatenated in single pdf output
-def write_pdf(input_directory, lecture_name):
+def write_pdf(input_directory, lecture_name, output_directory):
 	fname = lecture_name+'_'+'output'+'.pdf'
-	with open(fname, "wb") as f:
+	with open( os.path.join(output_directory,fname), "wb") as f:
 		imgs = []
 		for fname in os.listdir(input_directory):
 			if not fname.endswith(".jpg"):
