@@ -14,10 +14,10 @@ The -o flag is optional, if the -o flag is not used, the default output director
 
 Example:
 1. python main.py -f /Users/rustum/Desktop/6_LM_1.pdf
-This will output the pdf to the directory where the python file is located
+a. This will output the pdf to the directory where the python file is located
 
 2. python3 main.py -f /Users/rustum/Downloads/10_pos.pdf -o /Users/rustum/Desktop/INFO\ 159
-This will output the pdf under the directory I specified (/Users/rustum/Desktop/INFO\ 159)
+a. This will output the pdf under the directory I specified (/Users/rustum/Desktop/INFO\ 159)
 
 Output:
 6_LM_1_output.pdf
